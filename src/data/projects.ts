@@ -169,7 +169,7 @@ export const projects: Project[] = [
       "Built steering and motion control logic for autonomous UUV navigation toward detected spills",
       "Integrated a collection mechanism triggered by proximity to detected oil patches",
     ],
-    images: ["/images/projects/submarine.jpeg"],
+    images: ["/images/projects/Submarine.jpeg"],
     tech: ["Raspberry Pi", "Python", "YOLO", "Motion Control", "Computer Vision"],
     date: "Jun 2023",
     priority: 5,
