@@ -18,7 +18,7 @@ export function Footer() {
         </p>
 
         <p className="font-mono text-xs text-center" style={{ color: "var(--color-muted)" }}>
-          Built with coffee, solder, and a lot of debugging.
+          Built with passion, solder, and a lot of debugging.
         </p>
       </div>
     </footer>
