@@ -60,7 +60,7 @@ export function About() {
                 </span>
                 {" "}studying{" "}
                 <span style={{ color: "var(--color-text)" }} className="font-semibold">
-                  Electrical and Computer Engineering
+                  Electrical and Computer Engineering and Computer Science
                 </span>{" "}
                 with a{" "}
                 <span style={{ color: "var(--color-primary)" }} className="font-semibold">
@@ -78,9 +78,14 @@ export function About() {
                 My work spans robotics, computer vision, embedded systems, and ML. My goal is to build technologies that make the world a better place.
               </p>
               <p>
+                Right now I&apos;m at the{" "}
+                <span style={{ color: "var(--color-text)" }} className="font-medium">Duke Biomechanics and Wearable Robotics Lab</span>
+                , building an ankle exoskeleton for gait rehabilitation.
+              </p>
+              <p>
                 I&apos;ve done research at the{" "}
                 <span style={{ color: "var(--color-text)" }} className="font-medium">University of Cambridge</span>{" "}
-                on RNA sequencing for neurodivergence, instructed 50+ students in AI and robotics in Tunisia, and participated in multiple expos and hackathons across 3 continents.
+                on RNA sequencing for neurodivergence, instructed 25+ students in AI and robotics in Tunisia, and participated in multiple expos and hackathons across 3 continents.
               </p>
             </div>
 

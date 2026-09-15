@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ChevronDown, X } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
-import { awards, Award } from "@/data/awards";
+import { awards, awardCount, Award } from "@/data/awards";
 
 /* ── Lightbox for full cert image ─────────────────────────── */
 function CertLightbox({ award, onClose }: { award: Award; onClose: () => void }) {
@@ -64,11 +64,12 @@ const REVEAL_INTERVAL = 90;  // ms between each award line appearing
 
 const EMOJI: Record<string, string> = {
   "1st Place": "🥇",
-  "2nd Place": "🥈",
   "Gold Medal": "🥇",
+  "2nd Place": "🥈",
   "Bronze Medal": "🥉",
-  "APA": "🧠",
-  "National": "🌍",
+  "Psychological": "🧠",
+  "Represented": "🌍",
+  "Scholar": "🎓",
   "Hackathon": "⚡",
 };
 function awardEmoji(title: string) {
@@ -183,6 +184,29 @@ export function Awards() {
               />
             </div>
 
+            {/* Summary output */}
+            {cmdTyped.length >= CMD.length && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.2 }}
+                className="text-[12px] mb-4"
+                style={{ color: "var(--color-muted)" }}
+              >
+                {[
+                  { n: awardCount("win"), label: "competition awards" },
+                  { n: awardCount("honor"), label: "honors" },
+                  { n: awardCount("scholarship"), label: "scholarships" },
+                ].map((s, i) => (
+                  <span key={s.label}>
+                    {i > 0 && " · "}
+                    <span className="font-semibold" style={{ color: "var(--color-accent)" }}>{s.n}</span>{" "}
+                    {s.label}
+                  </span>
+                ))}
+              </motion.p>
+            )}
+
             {/* Award lines */}
             <div className="space-y-2">
               {awards.slice(0, revealedCount).map((award, i) => (
@@ -216,12 +240,14 @@ export function Awards() {
                     >
                       {award.issuer}
                     </span>
-                    <span
-                      className="text-[11px] font-mono"
-                      style={{ color: "var(--color-primary)", opacity: 0.7 }}
-                    >
-                      [{award.year}]
-                    </span>
+                    {award.year && (
+                      <span
+                        className="text-[11px] font-mono"
+                        style={{ color: "var(--color-primary)", opacity: 0.7 }}
+                      >
+                        [{award.year}]
+                      </span>
+                    )}
                   </div>
                 </motion.div>
               ))}

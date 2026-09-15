@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { CircuitSVG } from "./CircuitSVG";
+import { awards } from "@/data/awards";
 import { Download, ArrowRight, ExternalLink } from "lucide-react";
 
 const BOOT_LINES = [
@@ -107,11 +108,26 @@ export function Hero() {
                 className="text-lg md:text-xl font-display font-medium mb-2"
                 style={{ color: "var(--color-muted)" }}
               >
-                Duke University — Electrical & Computer Engineering
+                Duke University · Electrical & Computer Engineering and Computer Science
               </p>
-              <p className="text-sm font-mono mb-6" style={{ color: "var(--color-primary)" }}>
+              <p className="text-sm font-mono mb-4" style={{ color: "var(--color-primary)" }}>
                 Robotics & Automation Certificate
               </p>
+
+              {/* Scholarship titles */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {awards
+                  .filter((a) => a.category === "scholarship")
+                  .map((a) => (
+                    <span
+                      key={a.title}
+                      className="font-mono text-xs px-2.5 py-1 rounded-full border"
+                      style={{ borderColor: "var(--color-accent)", color: "var(--color-accent)" }}
+                    >
+                      {a.title}
+                    </span>
+                  ))}
+              </div>
 
 
               <p

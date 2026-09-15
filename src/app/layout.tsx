@@ -21,9 +21,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mohamed Cherif Braham — Builder & Engineer",
+  title: "Mohamed Cherif Braham | Builder & Engineer",
   description:
-    "Duke student studying Electrical & Computer Engineering with a Robotics & Automation certificate. I build robots, hardware, and AI that solve problems I care about.",
+    "Duke student studying Electrical & Computer Engineering and Computer Science with a Robotics & Automation certificate. I build robots, hardware, and AI that solve problems I care about.",
   openGraph: {
     title: "Mohamed Cherif Braham",
     description:
