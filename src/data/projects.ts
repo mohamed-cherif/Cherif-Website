@@ -27,7 +27,7 @@ export const projects: Project[] = [
     ],
     images: ["/images/projects/kinematiks.png"],
     tech: ["Mathematics", "Research", "LaTeX", "IB Diploma"],
-    pdfUrl: "/Math-IA-Mohamed-Cherif-Braham.pdf",
+    pdfUrl: "/Math-Investigation-Mohamed-Cherif-Braham.pdf",
     date: "2024",
     priority: 0,
   },
