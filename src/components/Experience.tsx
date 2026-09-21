@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { SectionHeading } from "./SectionHeading";
 import { experiences } from "@/data/experience";
-import { Microscope, Users, GraduationCap, Wrench } from "lucide-react";
+import { Microscope, Users, GraduationCap, Wrench, ArrowRight } from "lucide-react";
 
 const iconMap = {
   research: Microscope,
@@ -24,7 +25,7 @@ export function Experience() {
     <section
       id="experience"
       className="py-20 md:py-28"
-      style={{ background: "var(--color-surface)" }}
+      style={{ background: "var(--color-bg)" }}
     >
       <div className="max-w-4xl mx-auto px-6">
         <SectionHeading label="experience" title="Where I've worked" />
@@ -54,7 +55,7 @@ export function Experience() {
                   <div
                     className="absolute -left-14 w-9 h-9 rounded-full border-2 flex items-center justify-center"
                     style={{
-                      background: "var(--color-surface)",
+                      background: "var(--color-bg)",
                       borderColor: color,
                       color,
                     }}
@@ -66,7 +67,7 @@ export function Experience() {
                   <div
                     className="rounded-2xl border p-5 md:p-6"
                     style={{
-                      background: "var(--color-bg)",
+                      background: "var(--color-surface)",
                       borderColor: "var(--color-border)",
                     }}
                   >
@@ -104,6 +105,16 @@ export function Experience() {
                         </li>
                       ))}
                     </ul>
+
+                    {exp.projectId && (
+                      <Link
+                        href={`/projects/${exp.projectId}`}
+                        className="mt-4 inline-flex items-center gap-1 font-mono text-xs hover:underline underline-offset-2"
+                        style={{ color }}
+                      >
+                        View project <ArrowRight size={12} />
+                      </Link>
+                    )}
                   </div>
                 </motion.div>
               );

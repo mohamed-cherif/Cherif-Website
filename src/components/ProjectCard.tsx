@@ -3,16 +3,16 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ExternalLink, ArrowUpRight, FileText } from "lucide-react";
+import Link from "next/link";
+import { ExternalLink, ArrowUpRight, ArrowRight, FileText } from "lucide-react";
 import { Project } from "@/data/projects";
 
 interface ProjectCardProps {
   project: Project;
-  onClick: () => void;
   index: number;
 }
 
-export function ProjectCard({ project, onClick, index }: ProjectCardProps) {
+export function ProjectCard({ project, index }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
@@ -38,7 +38,6 @@ export function ProjectCard({ project, onClick, index }: ProjectCardProps) {
       transition={{ duration: 0.5, delay: index * 0.08 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-      onClick={onClick}
       style={{
         transform: `perspective(800px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
         transition: "transform 0.15s ease",
@@ -85,7 +84,10 @@ export function ProjectCard({ project, onClick, index }: ProjectCardProps) {
             className="text-lg font-display font-bold leading-tight"
             style={{ color: "var(--color-text)" }}
           >
-            {project.title}
+            {/* Stretched link: the ::after overlay makes the whole card clickable */}
+            <Link href={`/projects/${project.id}`} className="after:absolute after:inset-0">
+              {project.title}
+            </Link>
           </h3>
           <motion.div
             className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
@@ -127,8 +129,7 @@ export function ProjectCard({ project, onClick, index }: ProjectCardProps) {
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="mt-3 inline-flex items-center gap-1 font-mono text-xs transition-colors"
+            className="relative z-10 mt-3 mr-4 inline-flex items-center gap-1 font-mono text-xs transition-colors"
             style={{ color: "var(--color-primary)" }}
           >
             Live <ExternalLink size={10} />
@@ -139,13 +140,19 @@ export function ProjectCard({ project, onClick, index }: ProjectCardProps) {
             href={project.pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="mt-3 inline-flex items-center gap-1 font-mono text-xs transition-colors"
+            className="relative z-10 mt-3 mr-4 inline-flex items-center gap-1 font-mono text-xs transition-colors"
             style={{ color: "var(--color-primary)" }}
           >
             Read PDF <FileText size={10} />
           </a>
         )}
+
+        <p
+          className="mt-4 inline-flex items-center gap-1 font-mono text-xs"
+          style={{ color: "var(--color-primary)" }}
+        >
+          View project <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" />
+        </p>
       </div>
     </motion.div>
   );

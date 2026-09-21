@@ -21,6 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mohamed-cherif-braham.vercel.app"),
   title: "Mohamed Cherif Braham | Builder & Engineer",
   description:
     "Duke student studying Electrical & Computer Engineering and Computer Science with a Robotics & Automation certificate. I build robots, hardware, and AI that solve problems I care about.",

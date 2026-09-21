@@ -1,10 +1,27 @@
+export interface ProjectDemo {
+  src: string; // animated GIF, served unoptimized
+  caption: string;
+  width: number;
+  height: number;
+}
+
+export interface ProjectSection {
+  heading: string;
+  body?: string;
+  bullets?: string[];
+}
+
 export interface Project {
-  id: string;
+  id: string; // also the URL slug: /projects/<id>
   title: string;
+  shortTitle?: string; // for compact lists (skills "used in", prev/next links)
   tagline: string;
   description: string;
   bullets: string[];
   images: string[];
+  captions?: Record<string, string>; // keyed by image path
+  demos?: ProjectDemo[];
+  sections?: ProjectSection[]; // deeper write-up shown on the project page
   tech: string[];
   awards?: string[];
   liveUrl?: string;
@@ -15,8 +32,84 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "Math Kinematics",
+    id: "so100-arm",
+    title: "SO-100 Robotic Arm: Agent and Vision Pick-and-Place",
+    shortTitle: "SO-100 Robotic Arm",
+    tagline:
+      "A physical robot arm that picks objects up and drops them into a cup, controlled two ways: a Claude agent over MCP for the cube, and my own YOLOE + ArUco vision pipeline for the pen.",
+    description:
+      "A self-directed project on the SO-100 robotic arm. I started with the math, deriving the arm's kinematics from first principles and writing my own inverse-kinematics solver. Then I built two different ways for the physical arm to find an object, pick it up, and place it in a cup. The first hands perception and decision-making to a Claude agent that drives the arm through the Model Context Protocol (MCP). The second is a dedicated vision pipeline that detects the object and servos the gripper onto it.",
+    bullets: [
+      "Zero-shot pick-and-place on the physical arm: a Claude agent over MCP repeatedly picked up the cube and dropped it in the cup, with no task-specific training.",
+      "A separate vision pipeline (YOLOE-seg detection + ArUco visual servoing) picks up the pen and places it in the cup.",
+      "Closed-form inverse-kinematics solver verified against forward kinematics over 300 simulated round trips (simulation-only).",
+    ],
+    sections: [
+      {
+        heading: "Kinematics from first principles",
+        bullets: [
+          "Derived the arm's rotation matrices and homogeneous transforms from first principles.",
+          "Implemented a closed-form planar inverse-kinematics solver that exploits the arm's parallel joint geometry: once the base rotation is set, the shoulder, elbow, and wrist joints move in a single plane.",
+          "Verified the solver against forward kinematics over 300 simulated round-trip trials, with near-zero residual error. This solver is simulation-only and has not been tested on hardware.",
+        ],
+      },
+      {
+        heading: "Approach 1: Claude agent over MCP (the cube)",
+        body:
+          "I connected a Claude agent to the physical arm through MCP, so the agent can see the scene and command the arm as a tool.",
+        bullets: [
+          "The agent estimates where the target is from the camera image, and camera calibration maps that estimate into the arm's workspace.",
+          "The agent moves the arm through an MCP tool that takes gripper moves in millimetres (up, forward, and so on). An IK control loop turns each move into joint commands.",
+          "Zero-shot: no task-specific training. The arm repeatedly picked up the cube and dropped it into the cup.",
+        ],
+      },
+      {
+        heading: "Approach 2: Vision pipeline (the pen)",
+        body:
+          "As an alternative to agent-based control, I built a dedicated perception and control pipeline.",
+        bullets: [
+          "YOLOE-seg detects and segments the objects in the camera image. Each pen is marked with a confidence score, a center point, and an orientation line.",
+          "An ArUco marker on the gripper gives its position in the same image, and visual servoing drives the gripper onto the pen.",
+          "The arm uses this pipeline to pick up the pen and place it in the cup.",
+        ],
+      },
+    ],
+    images: [
+      "/images/projects/so100-cube.jpeg",
+      "/images/projects/so100-vision-detector.jpeg",
+    ],
+    captions: {
+      "/images/projects/so100-cube.jpeg":
+        "The SO-100 holding the cube over the cup. On the laptop, the Claude agent is sending gripper moves through MCP.",
+      "/images/projects/so100-vision-detector.jpeg":
+        "Vision pipeline debug view: both pens detected (0.85 and 0.80 confidence), each with a center point and orientation line. The ArUco marker on the gripper gives the servoing loop the gripper's position.",
+    },
+    demos: [
+      {
+        src: "/images/projects/so100-cube-demo.gif",
+        caption: "Claude agent over MCP: the arm lowers the cube into the cup and lets go.",
+        width: 510,
+        height: 340,
+      },
+    ],
+    tech: [
+      "Claude + MCP",
+      "YOLOE-seg",
+      "OpenCV / ArUco",
+      "Inverse Kinematics",
+      "LeRobot",
+      "PyTorch",
+      "Python",
+      "Camera Calibration",
+      "Visual Servoing",
+    ],
+    date: "Aug 2026 – Sep 2026",
+    priority: 0,
+  },
+  {
+    id: "math-kinematics",
     title: "Deriving forward and inverse kinematics for a 2-DOF robotic arm",
+    shortTitle: "2-DOF Kinematics (IB Math IA)",
     tagline: "A 20-page investigation exploring mathematical modeling of a 2-DOF robotic arm.",
     description:
       "My 20-page derivation paper that I wrote as part of the International Baccalaureate Diploma Programme. The paper dives deep into a mathematical topic of my choosing, applying rigorous analysis, modeling, and proof to produce an original piece of academic work.",
@@ -29,7 +122,7 @@ export const projects: Project[] = [
     tech: ["Mathematics", "Research", "LaTeX", "IB Diploma"],
     pdfUrl: "/Math-Investigation-Mohamed-Cherif-Braham.pdf",
     date: "2024",
-    priority: 0,
+    priority: 1,
   },
   {
     id: "cache-miss-fsm",
@@ -44,7 +137,7 @@ export const projects: Project[] = [
     images: [],
     tech: ["SystemVerilog", "Icarus Verilog", "Digital Logic", "RTL Simulation"],
     date: "Sep 2026",
-    priority: 3,
+    priority: 4,
   },
   {
     id: "do-robotics",
@@ -67,7 +160,57 @@ export const projects: Project[] = [
     ],
     tech: ["Flutter", "ESP32", "TFLite", "Fusion 360", "3D Printing", "Bluetooth", "Computer Vision", "Dart"],
     date: "Feb 2026 – May 2026",
-    priority: 4,
+    priority: 5,
+  },
+  {
+    id: "remote-light-switch",
+    title: "Remote Light Switch",
+    tagline:
+      "A retrofit that flips an ordinary wall switch from my phone: an ESP32 web page drives a servo and a 3D-printed rack and pinion I designed in Onshape.",
+    description:
+      "I built a remote control for a standard wall light switch that doesn't touch the electrical wiring. A 3D-printed mechanism mounts over the existing switch plate, and a servo moves it to flip the switches. An ESP32 serves a small control page over Wi-Fi, so I can turn the lights on or off from my phone's browser.",
+    bullets: [
+      "Flips a standard double wall switch from a phone browser, with no rewiring.",
+      "Rack-and-pinion mount designed in Onshape and 3D-printed.",
+      "ESP32 web server drives an MG995 servo over Wi-Fi.",
+    ],
+    sections: [
+      {
+        heading: "The mechanism",
+        body:
+          "A toggle switch needs a straight up-and-down push, but a servo only rotates. I designed a rack and pinion in Onshape to convert one into the other.",
+        bullets: [
+          "The servo turns a pinion gear, which drives a vertical rack up and down.",
+          "An H-shaped yoke on the rack captures both toggles on the plate, so one servo move flips both switches together.",
+          "The frame screws onto the wall plate's existing screws, so installing it doesn't involve touching the mains wiring.",
+          "Actuated by an MG995, a metal-gear hobby servo with enough torque to push the toggles.",
+        ],
+      },
+      {
+        heading: "Electronics and control",
+        bullets: [
+          "An ESP32 joins the Wi-Fi network and hosts a small control page, \"Wireless MG995 Control\", with Lights on and Lights off buttons.",
+          "Each button sends a request to the ESP32, which drives the servo to the position that flips the switches on or off.",
+          "No app to install: it works from the phone's web browser.",
+        ],
+      },
+    ],
+    images: ["/images/projects/light-switch.jpeg"],
+    captions: {
+      "/images/projects/light-switch.jpeg":
+        "The mount over a double toggle switch plate. The MG995 servo (left) turns the pinion, which drives the vertical rack and its yoke.",
+    },
+    demos: [
+      {
+        src: "/images/projects/light-switch-demo.gif",
+        caption: "Tapping Lights off, then Lights on: the servo flips the switches and the room goes dark, then lights back up.",
+        width: 340,
+        height: 604,
+      },
+    ],
+    tech: ["ESP32", "Onshape", "3D Printing (FDM)", "Servo Control", "Rack & Pinion", "Wi-Fi Web Server"],
+    date: "Sep 2026",
+    priority: 6,
   },
   {
     id: "impaq",
@@ -86,14 +229,21 @@ export const projects: Project[] = [
       "/images/projects/impaq-1.jpeg",
       "/images/projects/impaq-2.jpeg",
       "/images/projects/impaq-3.jpeg",
+      "/images/projects/impaq-4.jpeg",
+      "/images/projects/impaq-5.jpeg",
     ],
-    tech: ["ESP32", "C++", "Flutter", "BLE", "Seeed Studio", "Hardware"],
+    captions: {
+      "/images/projects/impaq-4.jpeg": "Bench testing the finished mouthguard.",
+      "/images/projects/impaq-5.jpeg": "Breadboard prototype of the sensing electronics.",
+    },
+    tech: ["ESP32", "C++", "Flutter", "BLE", "Seeed Studio", "Accelerometer", "Signal Processing", "Bench Debugging"],
     date: "Jan 2026",
-    priority: 2,
+    priority: 3,
   },
   {
-    id: "placenta",
+    id: "blood-loss-monitor",
     title: "Blood Loss Monitoring Device for PAS Surgery",
+    shortTitle: "Blood Loss Monitor",
     tagline: "A validated prototype for measuring vaginal blood loss in placenta accreta spectrum surgery.",
     description:
       "As part of Duke's Pratt School of Engineering Design, I built a prototype to address a gap in placenta accreta spectrum (PAS) surgery: no reliable method existed to collect and measure blood leaving the uterus through the vagina. The device collects, vacuums, and weighs blood in real time, with an alert at every 250 mL threshold.",
@@ -108,10 +258,10 @@ export const projects: Project[] = [
     images: [
       "/images/projects/placenta.jpeg",
     ],
-    tech: ["CAD", "Onshape", "Arduino", "Load Cell", "Silicone Molding", "Embedded Systems"],
+    tech: ["CAD", "Onshape", "Arduino", "Load Cell", "Silicone Molding", "3D Printing", "Embedded Systems"],
     awards: ["Duke Pratt Design Expo 2025"],
     date: "Aug 2025 – Dec 2025",
-    priority: 1,
+    priority: 2,
   },
   {
     id: "wildguard",
@@ -132,7 +282,7 @@ export const projects: Project[] = [
     tech: ["YOLO", "Raspberry Pi", "Python", "Pandas", "Computer Vision", "ML"],
     awards: ["Gold Medal, I-FEST² 2021", "Represented Tunisia, Expo Science Asia, Dubai 2022"],
     date: "Oct 2021 – Apr 2022",
-    priority: 9,
+    priority: 11,
   },
   {
     id: "psybot",
@@ -157,7 +307,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://psybot.vercel.app/",
     date: "Dec 2022 – Nov 2025",
-    priority: 5,
+    priority: 7,
   },
   {
     id: "demeter",
@@ -174,7 +324,7 @@ export const projects: Project[] = [
     tech: ["Computer Vision", "Pose Estimation"],
     awards: ["Gold Medal & Top-10, I-FEST² 2023"],
     date: "Feb 2023 – Feb 2024",
-    priority: 6,
+    priority: 8,
   },
   {
     id: "mustfocus",
@@ -194,10 +344,10 @@ export const projects: Project[] = [
     tech: ["Python", "Computer Vision", "Eye Tracking", "OpenCV", "ML"],
     awards: ["2nd Place, AI4Health Hackathon"],
     date: "Aug 2023",
-    priority: 8,
+    priority: 10,
   },
   {
-    id: "submarine",
+    id: "oil-detecting-uuv",
     title: "Oil-Detecting UUV",
     tagline: "A prototype autonomous underwater vehicle that detects oil spills and steers toward them.",
     description:
@@ -209,6 +359,12 @@ export const projects: Project[] = [
     images: ["/images/projects/Submarine.jpeg"],
     tech: ["Raspberry Pi", "Python", "YOLO", "Closed-Loop Control", "Computer Vision"],
     date: "Jun 2023",
-    priority: 7,
+    priority: 9,
   },
 ];
+
+export const orderedProjects: Project[] = [...projects].sort((a, b) => a.priority - b.priority);
+
+export function getProject(id: string): Project | undefined {
+  return projects.find((p) => p.id === id);
+}

@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { SectionHeading } from "./SectionHeading";
-import { skillGroups } from "@/data/skills";
 
 export function About() {
   return (
@@ -42,7 +41,7 @@ export function About() {
             />
           </motion.div>
 
-          {/* Bio + skills */}
+          {/* Bio */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -50,7 +49,7 @@ export function About() {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <div
-              className="text-base leading-relaxed space-y-4 mb-8"
+              className="text-base leading-relaxed space-y-4"
               style={{ color: "var(--color-muted)" }}
             >
               <p>
@@ -87,43 +86,6 @@ export function About() {
                 <span style={{ color: "var(--color-text)" }} className="font-medium">University of Cambridge</span>{" "}
                 on RNA sequencing for neurodivergence, instructed 25+ students in AI and robotics in Tunisia, and participated in multiple expos and hackathons across 3 continents.
               </p>
-            </div>
-
-            {/* Skill groups */}
-            <div className="space-y-5">
-              {skillGroups.map((group, gi) => (
-                <motion.div
-                  key={group.label}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: gi * 0.08 }}
-                >
-                  <p
-                    className="font-mono text-xs tracking-widest uppercase mb-2"
-                    style={{ color: "var(--color-primary)" }}
-                  >
-                    {group.label}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-x-0 gap-y-1">
-                    {group.skills.map((skill, si) => (
-                      <span key={skill} className="flex items-center">
-                        <span className="tech-chip">{skill}</span>
-                        {si < group.skills.length - 1 && (
-                          <span
-                            className="mx-2 inline-block w-px select-none"
-                            style={{
-                              height: "12px",
-                              background: "var(--color-primary)",
-                              opacity: 0.25,
-                            }}
-                          />
-                        )}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
             </div>
           </motion.div>
         </div>

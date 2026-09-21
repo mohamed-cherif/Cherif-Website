@@ -5,6 +5,7 @@ export interface Experience {
   dates: string;
   bullets: string[];
   type: "research" | "teaching" | "leadership" | "technical";
+  projectId?: string; // links to /projects/<id>
 }
 
 export const experiences: Experience[] = [
@@ -40,10 +41,11 @@ export const experiences: Experience[] = [
     dates: "Aug 2026 – Sep 2026",
     bullets: [
       "Derived rotation matrices and homogeneous transforms from first principles; implemented a closed-form planar IK solver exploiting the arm's parallel joint geometry. Verified against forward kinematics over 300 simulated round-trip trials with near-zero residual error; simulation-only, not tested on hardware.",
-      "Deployed a zero-shot pick-and-place system on the physical arm: integrated a Claude agent (via MCP) for target estimation with camera calibration and an IK control loop driving arm motion. Achieved repeated success (cube into bucket) with no task-specific training.",
-      "Separately developing an on-arm vision pipeline (YOLOE-seg + ArUco visual servoing) as an alternative to agent-based control; in progress, not yet reliable.",
+      "Deployed a zero-shot pick-and-place system on the physical arm: integrated a Claude agent (via MCP) for target estimation with camera calibration and an IK control loop driving arm motion. Achieved repeated success (cube into cup) with no task-specific training.",
+      "Separately built a vision pipeline (YOLOE-seg detection + ArUco visual servoing) as an alternative to agent-based control; the arm uses it to pick up a pen and place it in the cup.",
     ],
     type: "research",
+    projectId: "so100-arm",
   },
   {
     role: "Research Intern",
