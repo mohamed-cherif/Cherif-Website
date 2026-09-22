@@ -27,7 +27,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     setTilt({ x, y });
   };
 
-  const hasImage = project.images.length > 0;
+  const cover = project.cover ?? project.images[0];
 
   return (
     <motion.div
@@ -49,10 +49,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       whileHover={{ y: -4 }}
     >
       {/* Image */}
-      {hasImage ? (
+      {cover ? (
         <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
           <Image
-            src={project.images[0]}
+            src={cover}
             alt={project.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"

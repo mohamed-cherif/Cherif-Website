@@ -31,7 +31,7 @@ export const skillGroups: SkillGroup[] = [
       "Edge AI / TinyML",
       "LLM Agents (Claude + MCP)",
     ],
-    usedIn: ["so100-arm", "do-robotics", "wildguard", "demeter", "mustfocus", "psybot"],
+    usedIn: ["so100-arm", "do-robotics", "wildguard", "mustfocus", "psybot"],
   },
   {
     label: "Hardware & Electronics",

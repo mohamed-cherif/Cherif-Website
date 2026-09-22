@@ -5,6 +5,14 @@ export interface ProjectDemo {
   height: number;
 }
 
+export interface ProjectVideo {
+  src: string; // MP4 (H.264), played with controls
+  poster: string;
+  caption: string;
+  width: number;
+  height: number;
+}
+
 export interface ProjectSection {
   heading: string;
   body?: string;
@@ -19,8 +27,10 @@ export interface Project {
   description: string;
   bullets: string[];
   images: string[];
+  cover?: string; // card image when it shouldn't be images[0]
   captions?: Record<string, string>; // keyed by image path
   demos?: ProjectDemo[];
+  videos?: ProjectVideo[];
   sections?: ProjectSection[]; // deeper write-up shown on the project page
   tech: string[];
   awards?: string[];
@@ -74,13 +84,14 @@ export const projects: Project[] = [
         ],
       },
     ],
+    cover: "/images/projects/so100-cube.jpeg",
     images: [
-      "/images/projects/so100-cube.jpeg",
+      "/images/projects/so100-arm-vision.jpeg",
       "/images/projects/so100-vision-detector.jpeg",
     ],
     captions: {
-      "/images/projects/so100-cube.jpeg":
-        "The SO-100 holding the cube over the cup. On the laptop, the Claude agent is sending gripper moves through MCP.",
+      "/images/projects/so100-arm-vision.jpeg":
+        "Testing the vision pipeline on my laptop: the test_detector window shows the live camera view of the gripper, the pens, and the cup.",
       "/images/projects/so100-vision-detector.jpeg":
         "Vision pipeline debug view: both pens detected (0.85 and 0.80 confidence), each with a center point and orientation line. The ArUco marker on the gripper gives the servoing loop the gripper's position.",
     },
@@ -134,10 +145,16 @@ export const projects: Project[] = [
       "Designed a 6-state Moore FSM tracking outstanding cache misses, then extended it to a multi-entry tracker array with per-entry tag comparators.",
       "Verified both with self-checking testbenches in Icarus Verilog (13/13 and 14/14 checks passing).",
     ],
-    images: [],
+    images: ["/images/projects/fsm-diagram.png", "/images/projects/cache-sys.png"],
+    captions: {
+      "/images/projects/fsm-diagram.png":
+        "State diagram of the 6-state Moore FSM (IDLE, req_sent, got_ack, got_data, both_received, DONE), with the req and valid outputs of each state.",
+      "/images/projects/cache-sys.png":
+        "Where it sits: the cache between the CPU and memory, with the cpu_req / data_valid and mem_req / mem_valid / mem_data handshake signals.",
+    },
     tech: ["SystemVerilog", "Icarus Verilog", "Digital Logic", "RTL Simulation"],
     date: "Sep 2026",
-    priority: 4,
+    priority: 6,
   },
   {
     id: "do-robotics",
@@ -210,7 +227,7 @@ export const projects: Project[] = [
     ],
     tech: ["ESP32", "Onshape", "3D Printing (FDM)", "Servo Control", "Rack & Pinion", "Wi-Fi Web Server"],
     date: "Sep 2026",
-    priority: 6,
+    priority: 4,
   },
   {
     id: "impaq",
@@ -225,12 +242,9 @@ export const projects: Project[] = [
       "Diagnosed a Bluetooth communication failure on a Seeed Studio board: used a multimeter to isolate insufficient power delivery from the onboard voltage regulator, then replaced it with one properly sized for the Bluetooth module, restoring reliable wireless communication.",
     ],
     images: [
-      "/images/projects/impaq-worn.jpeg",
-      "/images/projects/impaq-1.jpeg",
-      "/images/projects/impaq-2.jpeg",
       "/images/projects/impaq-3.jpeg",
-      "/images/projects/impaq-4.jpeg",
       "/images/projects/impaq-5.jpeg",
+      "/images/projects/impaq-4.jpeg",
     ],
     captions: {
       "/images/projects/impaq-4.jpeg": "Bench testing the finished mouthguard.",
@@ -257,7 +271,12 @@ export const projects: Project[] = [
     ],
     images: [
       "/images/projects/placenta.jpeg",
+      "/images/projects/placenta-poster.jpeg",
     ],
+    captions: {
+      "/images/projects/placenta-poster.jpeg":
+        "The project poster: the problem, the three-part design (modified menstrual cup, pump and vacuum attachments, Arduino scale with load cell), and the design-criteria test results.",
+    },
     tech: ["CAD", "Onshape", "Arduino", "Load Cell", "Silicone Molding", "3D Printing", "Embedded Systems"],
     awards: ["Duke Pratt Design Expo 2025"],
     date: "Aug 2025 – Dec 2025",
@@ -310,23 +329,6 @@ export const projects: Project[] = [
     priority: 7,
   },
   {
-    id: "demeter",
-    title: "DEMETER",
-    tagline: "Livestock disease detection: an online platform that helps farmers catch animal diseases with computer vision.",
-    description:
-      "DEMETER is an online platform for farmers that detects animal diseases using computer vision. I built it as part of a larger effort to modernize agricultural practices.",
-    bullets: [
-      "Built the first prototype around diseases with visible symptoms, using computer vision to detect lumpy skin disease in cows.",
-      "Extended it to analyze animal activity so possible diseases get caught before they spread, using pose estimation and monitoring the frequency of certain behaviors.",
-      "Won a gold medal and was selected among the top 10 projects at the I-FEST² competition 2023.",
-    ],
-    images: [],
-    tech: ["Computer Vision", "Pose Estimation"],
-    awards: ["Gold Medal & Top-10, I-FEST² 2023"],
-    date: "Feb 2023 – Feb 2024",
-    priority: 8,
-  },
-  {
     id: "mustfocus",
     title: "MustFocus",
     tagline: "A low-cost eye-tracking screening aid that flags attention patterns associated with ADHD in children.",
@@ -341,6 +343,16 @@ export const projects: Project[] = [
       "2nd place at the AI4Health Hackathon hosted by MUST University, organized by Hackathon Tunisia. Built with Mohamed Ali Maatoug.",
     ],
     images: ["/images/projects/mustfocus.png", "/images/projects/mustfocus2.png"],
+    videos: [
+      {
+        src: "/images/projects/mustfocus-demo.mp4",
+        poster: "/images/projects/mustfocus-demo-poster.jpeg",
+        caption:
+          "Demo: webcam eye-tracking calibration, a round of the Flappy Bird-style attention game, then the recorded gaze points plotted as a scatter plot and a heatmap.",
+        width: 1280,
+        height: 720,
+      },
+    ],
     tech: ["Python", "Computer Vision", "Eye Tracking", "OpenCV", "ML"],
     awards: ["2nd Place, AI4Health Hackathon"],
     date: "Aug 2023",
