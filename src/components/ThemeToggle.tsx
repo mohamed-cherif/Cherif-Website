@@ -28,8 +28,6 @@ export function ThemeToggle() {
         background: "var(--color-surface)",
         color: "var(--color-muted)",
       }}
-      whileHover={{ scale: 1.08 }}
-      whileTap={{ scale: 0.92 }}
       aria-label="Toggle theme"
     >
       <motion.div

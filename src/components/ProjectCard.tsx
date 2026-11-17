@@ -1,159 +1,81 @@
-"use client";
-
-import { useRef, useState } from "react";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink, ArrowUpRight, ArrowRight, FileText } from "lucide-react";
-import { Project } from "@/data/projects";
+import { ArrowUpRight } from "lucide-react";
+import type { Project } from "@/data/projects";
+import { LoopVideo } from "./LoopVideo";
 
 interface ProjectCardProps {
   project: Project;
   index: number;
+  wide?: boolean;
 }
 
-export function ProjectCard({ project, index }: ProjectCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const card = cardRef.current;
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const x = ((e.clientY - cy) / (rect.height / 2)) * 4;
-    const y = -((e.clientX - cx) / (rect.width / 2)) * 4;
-    setTilt({ x, y });
-  };
-
-  const cover = project.cover ?? project.images[0];
-
+export function ProjectCard({ project, index, wide }: ProjectCardProps) {
+  const number = String(index + 1).padStart(2, "0");
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-      style={{
-        transform: `perspective(800px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-        transition: "transform 0.15s ease",
-        cursor: "pointer",
-        background: "var(--color-surface)",
-        borderColor: "var(--color-border)",
-      }}
-      className="group relative rounded-2xl border overflow-hidden hover:border-[var(--color-primary)] transition-colors duration-300"
-      whileHover={{ y: -4 }}
+    <article
+      className={`group relative flex flex-col panel transition-colors duration-150 hover:border-[var(--color-accent)] ${
+        wide ? "lg:col-span-3" : "lg:col-span-2"
+      }`}
     >
-      {/* Image */}
-      {cover ? (
-        <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
+      {/* Media: a looping clip where there is one, otherwise a photo or render */}
+      <div
+        className="relative overflow-hidden border-b"
+        style={{ aspectRatio: wide ? "16/9" : "16/10", borderColor: "var(--color-border)", background: "#000" }}
+      >
+        {project.card.video ? (
+          <LoopVideo src={project.card.video} poster={project.card.poster} label={`${project.title} demo clip`} />
+        ) : (
           <Image
-            src={cover}
+            src={project.card.poster}
             alt={project.title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(min-width: 1024px) 560px, 100vw"
+            className={project.card.contain ? "object-contain" : "object-cover"}
           />
-          <div
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{
-              background: "linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.5))",
-            }}
-          />
-        </div>
-      ) : (
-        <div
-          className="flex items-center justify-center"
-          style={{ aspectRatio: "16/9", background: "var(--color-bg)" }}
+        )}
+        <span
+          className="label absolute top-0 left-0 px-2 py-1"
+          style={{ background: "var(--color-bg)", color: "var(--color-text)" }}
         >
-          {project.pdfUrl ? (
-            <FileText size={48} style={{ color: "var(--color-primary)", opacity: 0.45 }} />
-          ) : (
-            <span className="font-mono text-5xl opacity-30">{"</>"}</span>
-          )}
-        </div>
-      )}
-
-      {/* Content */}
-      <div className="p-5">
-        <div className="flex items-start justify-between gap-2 mb-1">
-          <h3
-            className="text-lg font-display font-bold leading-tight"
-            style={{ color: "var(--color-text)" }}
+          {number}
+        </span>
+        {project.badge && (
+          <span
+            className="label absolute top-0 right-0 px-2 py-1"
+            style={{ background: "var(--color-accent)", color: "#0a0b0d" }}
           >
+            {project.badge}
+          </span>
+        )}
+      </div>
+
+      <div className="flex flex-1 flex-col p-4">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="text-lg font-display font-semibold leading-snug" style={{ color: "var(--color-text)" }}>
             {/* Stretched link: the ::after overlay makes the whole card clickable */}
-            <Link href={`/projects/${project.id}`} className="after:absolute after:inset-0">
-              {project.title}
+            <Link href={`/projects/${project.id}`} className="after:absolute after:inset-0 after:z-10">
+              {project.shortTitle ?? project.title}
             </Link>
           </h3>
-          <motion.div
-            className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-            style={{ color: "var(--color-primary)" }}
-          >
-            <ArrowUpRight size={18} />
-          </motion.div>
+          <ArrowUpRight
+            size={18}
+            className="shrink-0 mt-0.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            style={{ color: "var(--color-accent)" }}
+          />
         </div>
-
-        <p className="font-mono text-xs mb-3" style={{ color: "var(--color-muted)" }}>
-          {project.date}
-        </p>
-
-        <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--color-muted)" }}>
+        <p className="mt-1.5 text-sm leading-snug" style={{ color: "var(--color-muted)" }}>
           {project.tagline}
         </p>
-
-        <div className="flex flex-wrap gap-1.5">
-          {project.tech.slice(0, 4).map((t) => (
-            <span key={t} className="tech-chip text-[10px] px-2 py-0.5">{t}</span>
-          ))}
-          {project.tech.length > 4 && (
-            <span className="tech-chip text-[10px] px-2 py-0.5">+{project.tech.length - 4}</span>
-          )}
-        </div>
-
-        {/* Awards strip */}
-        {project.awards && project.awards.length > 0 && (
-          <div className="mt-3 flex items-center gap-1.5">
-            <span style={{ color: "var(--color-accent)" }} className="text-xs">🏆</span>
-            <span className="font-mono text-[10px] truncate" style={{ color: "var(--color-accent)" }}>
-              {project.awards[0]}
+        <div className="mt-auto pt-4 flex flex-wrap items-center gap-1.5">
+          <span className="label mr-1">{project.date}</span>
+          {project.tech.slice(0, 3).map((t) => (
+            <span key={t} className="tech-chip">
+              {t}
             </span>
-          </div>
-        )}
-
-        {project.liveUrl && (
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative z-10 mt-3 mr-4 inline-flex items-center gap-1 font-mono text-xs transition-colors"
-            style={{ color: "var(--color-primary)" }}
-          >
-            Live <ExternalLink size={10} />
-          </a>
-        )}
-        {project.pdfUrl && (
-          <a
-            href={project.pdfUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative z-10 mt-3 mr-4 inline-flex items-center gap-1 font-mono text-xs transition-colors"
-            style={{ color: "var(--color-primary)" }}
-          >
-            Read PDF <FileText size={10} />
-          </a>
-        )}
-
-        <p
-          className="mt-4 inline-flex items-center gap-1 font-mono text-xs"
-          style={{ color: "var(--color-primary)" }}
-        >
-          View project <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" />
-        </p>
+          ))}
+        </div>
       </div>
-    </motion.div>
+    </article>
   );
 }

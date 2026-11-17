@@ -44,14 +44,12 @@ export function Navbar() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          background: scrolled
-            ? "rgba(var(--color-bg-rgb, 248,250,252), 0.85)"
-            : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          borderBottom: scrolled ? "1px solid var(--color-border)" : "none",
+          background: scrolled ? "color-mix(in srgb, var(--color-bg) 92%, transparent)" : "transparent",
+          backdropFilter: scrolled ? "blur(8px)" : "none",
+          borderBottom: `1px solid ${scrolled ? "var(--color-border)" : "transparent"}`,
         }}
       >
-        <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <nav className="max-w-6xl mx-auto px-5 md:px-6 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
@@ -60,24 +58,20 @@ export function Navbar() {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="font-mono font-bold text-sm tracking-wider"
-            style={{ color: "var(--color-primary)" }}
+            className="font-mono font-medium text-sm tracking-[0.18em] flex items-center gap-2"
+            style={{ color: "var(--color-text)" }}
           >
-            <span style={{ color: "var(--color-accent)" }}>{">"}</span>
-            {" MCB"}
-            <span className="animate-[blink_1.2s_step-start_infinite]">_</span>
+            <span className="inline-block w-2 h-2" style={{ background: "var(--color-accent)" }} />
+            MCB
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-7">
             {links.map((l) => (
               <button
                 key={l.href}
                 onClick={() => handleLink(l.href)}
-                className="font-display text-sm font-medium transition-colors duration-200 cursor-pointer"
-                style={{ color: "var(--color-muted)" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-primary)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-muted)")}
+                className="label transition-colors duration-150 cursor-pointer hover:text-[var(--color-accent)]"
               >
                 {l.label}
               </button>

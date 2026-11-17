@@ -1,0 +1,1159 @@
+{
+  "claw-v3": {
+    "src": "/models/claw-v3.glb",
+    "bytes": 161720,
+    "triangles": 48702,
+    "min": [
+      -90.86,
+      -124.8,
+      -109.79
+    ],
+    "max": [
+      90.86,
+      33.1,
+      105.79
+    ],
+    "parts": [
+      {
+        "name": "Cradle + dock + legs",
+        "role": "structure",
+        "center": [
+          0,
+          -60.9,
+          -2
+        ],
+        "size": [
+          181.72,
+          127.8,
+          215.59
+        ]
+      },
+      {
+        "name": "Clamp arch (rear)",
+        "role": "detail",
+        "center": [
+          0,
+          8.63,
+          -21
+        ],
+        "size": [
+          95.9,
+          45.26,
+          10
+        ]
+      },
+      {
+        "name": "Clamp arch (front)",
+        "role": "detail",
+        "center": [
+          0,
+          9.55,
+          -5
+        ],
+        "size": [
+          95.9,
+          47.1,
+          10
+        ]
+      },
+      {
+        "name": "Claw body",
+        "role": "actuator",
+        "center": [
+          -3.7,
+          -67,
+          7.55
+        ],
+        "size": [
+          63.5,
+          57.6,
+          87.1
+        ]
+      },
+      {
+        "name": "Front cap",
+        "role": "actuator",
+        "center": [
+          0,
+          -69.8,
+          17.2
+        ],
+        "size": [
+          47,
+          45,
+          67.8
+        ]
+      },
+      {
+        "name": "Jaw A (servo side)",
+        "role": "mechanism",
+        "center": [
+          -21.78,
+          -95.05,
+          17.8
+        ],
+        "size": [
+          49.97,
+          55.5,
+          53.4
+        ],
+        "pivot": {
+          "at": [
+            -14,
+            -82.8,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "open": -55
+        }
+      },
+      {
+        "name": "Jaw B",
+        "role": "mechanism",
+        "center": [
+          21.78,
+          -94.9,
+          17.8
+        ],
+        "size": [
+          49.97,
+          55.79,
+          53.4
+        ],
+        "pivot": {
+          "at": [
+            14,
+            -82.8,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "open": 55
+        }
+      }
+    ]
+  },
+  "claw-v2": {
+    "src": "/models/claw-v2.glb",
+    "bytes": 117240,
+    "triangles": 34166,
+    "min": [
+      -90.86,
+      -124.8,
+      -109.79
+    ],
+    "max": [
+      90.86,
+      33.1,
+      105.79
+    ],
+    "parts": [
+      {
+        "name": "Cradle + dock + legs",
+        "role": "structure",
+        "center": [
+          0,
+          -60.9,
+          -2
+        ],
+        "size": [
+          181.72,
+          127.8,
+          215.59
+        ]
+      },
+      {
+        "name": "Clamp arch (rear)",
+        "role": "detail",
+        "center": [
+          0,
+          11.64,
+          -21
+        ],
+        "size": [
+          93.5,
+          39.23,
+          10
+        ]
+      },
+      {
+        "name": "Clamp arch (front)",
+        "role": "detail",
+        "center": [
+          0,
+          12.56,
+          -5
+        ],
+        "size": [
+          93.5,
+          41.07,
+          10
+        ]
+      },
+      {
+        "name": "Claw body",
+        "role": "actuator",
+        "center": [
+          -3.65,
+          -67,
+          7.55
+        ],
+        "size": [
+          63.5,
+          57.6,
+          87.1
+        ]
+      },
+      {
+        "name": "Front cap",
+        "role": "actuator",
+        "center": [
+          0,
+          -69.8,
+          17.2
+        ],
+        "size": [
+          47,
+          45,
+          67.8
+        ]
+      },
+      {
+        "name": "Jaw A (servo side)",
+        "role": "mechanism",
+        "center": [
+          -21.78,
+          -95.05,
+          17.8
+        ],
+        "size": [
+          49.97,
+          55.5,
+          53.4
+        ],
+        "pivot": {
+          "at": [
+            -14,
+            -82.8,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "open": -55
+        }
+      },
+      {
+        "name": "Jaw B",
+        "role": "mechanism",
+        "center": [
+          21.78,
+          -94.9,
+          17.8
+        ],
+        "size": [
+          49.97,
+          55.79,
+          53.4
+        ],
+        "pivot": {
+          "at": [
+            14,
+            -82.8,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "open": 55
+        }
+      }
+    ]
+  },
+  "claw-v1": {
+    "src": "/models/claw-v1.glb",
+    "bytes": 186896,
+    "triangles": 56738,
+    "min": [
+      -86.43,
+      -124.8,
+      -110.82
+    ],
+    "max": [
+      86.43,
+      33.1,
+      106.82
+    ],
+    "parts": [
+      {
+        "name": "Chassis cradle",
+        "role": "structure",
+        "center": [
+          0,
+          -16.9,
+          -2
+        ],
+        "size": [
+          95.46,
+          39.8,
+          153.52
+        ]
+      },
+      {
+        "name": "Claw dock",
+        "role": "detail",
+        "center": [
+          0,
+          -39.4,
+          -2.5
+        ],
+        "size": [
+          50,
+          5.2,
+          67
+        ]
+      },
+      {
+        "name": "Clamp arch (rear)",
+        "role": "detail",
+        "center": [
+          0,
+          17.63,
+          -21
+        ],
+        "size": [
+          84.7,
+          27.26,
+          10
+        ]
+      },
+      {
+        "name": "Clamp arch (front)",
+        "role": "detail",
+        "center": [
+          0,
+          18.55,
+          -5
+        ],
+        "size": [
+          84.7,
+          29.1,
+          10
+        ]
+      },
+      {
+        "name": "Landing leg (front left)",
+        "role": "structure",
+        "center": [
+          54.79,
+          -76.8,
+          83.91
+        ],
+        "size": [
+          63.29,
+          96,
+          45.82
+        ]
+      },
+      {
+        "name": "Landing leg (front right)",
+        "role": "structure",
+        "center": [
+          -54.79,
+          -76.8,
+          83.91
+        ],
+        "size": [
+          63.29,
+          96,
+          45.82
+        ]
+      },
+      {
+        "name": "Landing leg (rear left)",
+        "role": "structure",
+        "center": [
+          54.79,
+          -76.8,
+          -87.91
+        ],
+        "size": [
+          63.29,
+          96,
+          45.82
+        ]
+      },
+      {
+        "name": "Landing leg (rear right)",
+        "role": "structure",
+        "center": [
+          -54.79,
+          -76.8,
+          -87.91
+        ],
+        "size": [
+          63.29,
+          96,
+          45.82
+        ]
+      },
+      {
+        "name": "Claw body",
+        "role": "actuator",
+        "center": [
+          -3.65,
+          -67,
+          6.8
+        ],
+        "size": [
+          63.5,
+          57.6,
+          85.6
+        ]
+      },
+      {
+        "name": "Front plate",
+        "role": "actuator",
+        "center": [
+          0,
+          -69.1,
+          43.1
+        ],
+        "size": [
+          44,
+          43.4,
+          13
+        ]
+      },
+      {
+        "name": "Jaw A (servo side)",
+        "role": "mechanism",
+        "center": [
+          -21.78,
+          -95.05,
+          19.1
+        ],
+        "size": [
+          49.97,
+          55.5,
+          53
+        ],
+        "pivot": {
+          "at": [
+            -14,
+            -82.8,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "open": -55
+        }
+      },
+      {
+        "name": "Jaw B",
+        "role": "mechanism",
+        "center": [
+          21.78,
+          -94.9,
+          19.1
+        ],
+        "size": [
+          49.97,
+          55.79,
+          53
+        ],
+        "pivot": {
+          "at": [
+            14,
+            -82.8,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "open": 55
+        }
+      }
+    ]
+  },
+  "mavic-reference": {
+    "src": "/models/mavic-reference.glb",
+    "bytes": 123964,
+    "triangles": 38048,
+    "min": [
+      -293.18,
+      -64.79,
+      -306.38
+    ],
+    "max": [
+      378.7,
+      72.27,
+      305.07
+    ],
+    "parts": [
+      {
+        "name": "DJI Mavic Pro (reference model)",
+        "role": "reference",
+        "center": [
+          42.76,
+          3.74,
+          -0.65
+        ],
+        "size": [
+          671.89,
+          137.06,
+          611.45
+        ]
+      }
+    ]
+  },
+  "switch-v01": {
+    "src": "/models/switch-v01.glb",
+    "bytes": 11336,
+    "triangles": 2784,
+    "min": [
+      -31,
+      -15.96,
+      0
+    ],
+    "max": [
+      31,
+      72,
+      10.46
+    ],
+    "parts": [
+      {
+        "name": "Back plate",
+        "role": "structure",
+        "center": [
+          0,
+          36,
+          2.5
+        ],
+        "size": [
+          62,
+          72,
+          5
+        ]
+      },
+      {
+        "name": "Rack (28 teeth)",
+        "role": "mechanism",
+        "center": [
+          0,
+          28.02,
+          5.83
+        ],
+        "size": [
+          60,
+          87.96,
+          9.26
+        ]
+      }
+    ]
+  },
+  "switch-v02": {
+    "src": "/models/switch-v02.glb",
+    "bytes": 12364,
+    "triangles": 3156,
+    "min": [
+      -36.2,
+      -41,
+      0
+    ],
+    "max": [
+      31,
+      72,
+      26.5
+    ],
+    "parts": [
+      {
+        "name": "Frame",
+        "role": "structure",
+        "center": [
+          -2.6,
+          15.5,
+          13.25
+        ],
+        "size": [
+          67.2,
+          113,
+          26.5
+        ]
+      },
+      {
+        "name": "Rack (34 teeth)",
+        "role": "mechanism",
+        "center": [
+          0,
+          18.59,
+          5.88
+        ],
+        "size": [
+          60,
+          106.81,
+          9.16
+        ]
+      }
+    ]
+  },
+  "switch-v03": {
+    "src": "/models/switch-v03.glb",
+    "bytes": 12500,
+    "triangles": 3198,
+    "min": [
+      -36.2,
+      -41,
+      0
+    ],
+    "max": [
+      31,
+      72,
+      26.5
+    ],
+    "parts": [
+      {
+        "name": "Frame",
+        "role": "structure",
+        "center": [
+          -2.6,
+          15.5,
+          13.25
+        ],
+        "size": [
+          67.2,
+          113,
+          26.5
+        ]
+      },
+      {
+        "name": "Rack (34 teeth)",
+        "role": "mechanism",
+        "center": [
+          0,
+          18.59,
+          5.88
+        ],
+        "size": [
+          60,
+          106.81,
+          9.16
+        ]
+      }
+    ]
+  },
+  "switch-v04": {
+    "src": "/models/switch-v04.glb",
+    "bytes": 12824,
+    "triangles": 3294,
+    "min": [
+      -36.2,
+      -53.66,
+      0
+    ],
+    "max": [
+      31,
+      72,
+      26.5
+    ],
+    "parts": [
+      {
+        "name": "Frame",
+        "role": "structure",
+        "center": [
+          -2.6,
+          15.5,
+          13.25
+        ],
+        "size": [
+          67.2,
+          113,
+          26.5
+        ]
+      },
+      {
+        "name": "Rack (40 teeth)",
+        "role": "mechanism",
+        "center": [
+          0,
+          9.17,
+          5.88
+        ],
+        "size": [
+          60,
+          125.66,
+          9.16
+        ]
+      }
+    ]
+  },
+  "switch-final": {
+    "src": "/models/switch-final.glb",
+    "bytes": 136876,
+    "triangles": 40488,
+    "min": [
+      -61.2,
+      -61,
+      0
+    ],
+    "max": [
+      31,
+      72,
+      40.45
+    ],
+    "parts": [
+      {
+        "name": "Frame",
+        "role": "structure",
+        "center": [
+          -15.1,
+          5.5,
+          19.25
+        ],
+        "size": [
+          92.2,
+          133,
+          38.5
+        ]
+      },
+      {
+        "name": "Rack + yoke (40 teeth)",
+        "role": "mechanism",
+        "center": [
+          0,
+          9.17,
+          5.88
+        ],
+        "size": [
+          60,
+          125.66,
+          9.16
+        ],
+        "slide": {
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "mm": 12
+        }
+      },
+      {
+        "name": "MG995 servo",
+        "role": "actuator",
+        "center": [
+          -36.85,
+          -25.7,
+          24.6
+        ],
+        "size": [
+          46.5,
+          55.2,
+          20
+        ]
+      },
+      {
+        "name": "Pinion (30 teeth)",
+        "role": "mechanism",
+        "center": [
+          0.01,
+          -16.3,
+          24.5
+        ],
+        "size": [
+          16.68,
+          31.99,
+          31.89
+        ],
+        "pivot": {
+          "at": [
+            0,
+            -16.3,
+            24.5
+          ],
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "open": 45.8
+        }
+      },
+      {
+        "name": "Spline adapter",
+        "role": "detail",
+        "center": [
+          -10.76,
+          -16.3,
+          24.49
+        ],
+        "size": [
+          4.88,
+          20,
+          19.99
+        ]
+      }
+    ]
+  },
+  "dorobotics-v1": {
+    "src": "/models/dorobotics-v1.glb",
+    "bytes": 42876,
+    "triangles": 12728,
+    "min": [
+      -76.76,
+      -4,
+      -113
+    ],
+    "max": [
+      76.76,
+      23,
+      60
+    ],
+    "parts": [
+      {
+        "name": "Chassis v1",
+        "role": "structure",
+        "center": [
+          0,
+          9.5,
+          -26.5
+        ],
+        "size": [
+          153.51,
+          27,
+          173
+        ]
+      }
+    ]
+  },
+  "dorobotics-v2": {
+    "src": "/models/dorobotics-v2.glb",
+    "bytes": 29832,
+    "triangles": 8958,
+    "min": [
+      0,
+      0,
+      -149
+    ],
+    "max": [
+      210,
+      78,
+      4.6
+    ],
+    "parts": [
+      {
+        "name": "Chassis v2",
+        "role": "structure",
+        "center": [
+          105,
+          39,
+          -72.2
+        ],
+        "size": [
+          210,
+          78,
+          153.6
+        ]
+      }
+    ]
+  },
+  "dorobotics-final": {
+    "src": "/models/dorobotics-final.glb",
+    "bytes": 49216,
+    "triangles": 15346,
+    "min": [
+      0,
+      7,
+      -114.56
+    ],
+    "max": [
+      210,
+      85.15,
+      61.14
+    ],
+    "parts": [
+      {
+        "name": "Final print set",
+        "role": "structure",
+        "center": [
+          105,
+          46.07,
+          -26.71
+        ],
+        "size": [
+          210,
+          78.15,
+          175.71
+        ]
+      }
+    ]
+  },
+  "cup-mold": {
+    "src": "/models/cup-mold.glb",
+    "bytes": 42552,
+    "triangles": 13000,
+    "min": [
+      -42.27,
+      -13,
+      -82.8
+    ],
+    "max": [
+      42.94,
+      75.83,
+      30.48
+    ],
+    "parts": [
+      {
+        "name": "Cup mold",
+        "role": "structure",
+        "center": [
+          0.34,
+          31.42,
+          -26.16
+        ],
+        "size": [
+          85.21,
+          88.82,
+          113.28
+        ]
+      }
+    ]
+  },
+  "cup-mold-1": {
+    "src": "/models/cup-mold-1.glb",
+    "bytes": 7392,
+    "triangles": 2204,
+    "min": [
+      -24.13,
+      -5.08,
+      -24.09
+    ],
+    "max": [
+      24.13,
+      65.02,
+      24.09
+    ],
+    "parts": [
+      {
+        "name": "Cup mold 1",
+        "role": "mechanism",
+        "center": [
+          0,
+          29.97,
+          0
+        ],
+        "size": [
+          48.26,
+          70.1,
+          48.19
+        ]
+      }
+    ]
+  },
+  "cup-mold-2": {
+    "src": "/models/cup-mold-2.glb",
+    "bytes": 14536,
+    "triangles": 4540,
+    "min": [
+      -27.6,
+      -5.08,
+      -27.94
+    ],
+    "max": [
+      28.28,
+      65.02,
+      27.94
+    ],
+    "parts": [
+      {
+        "name": "Cup mold 2",
+        "role": "detail",
+        "center": [
+          0.34,
+          29.97,
+          0
+        ],
+        "size": [
+          55.88,
+          70.1,
+          55.88
+        ]
+      }
+    ]
+  },
+  "bewithme-plate": {
+    "src": "/models/bewithme-plate.glb",
+    "bytes": 11660,
+    "triangles": 3054,
+    "min": [
+      0,
+      0,
+      -120.96
+    ],
+    "max": [
+      116,
+      31,
+      0
+    ],
+    "parts": [
+      {
+        "name": "USB-C remodel, print plate",
+        "role": "structure",
+        "center": [
+          58,
+          15.5,
+          -60.48
+        ],
+        "size": [
+          116,
+          31,
+          120.96
+        ]
+      }
+    ]
+  },
+  "flix-frame": {
+    "src": "/models/flix-frame.glb",
+    "bytes": 56412,
+    "triangles": 17684,
+    "min": [
+      -48.03,
+      -15,
+      -48.03
+    ],
+    "max": [
+      48.03,
+      3,
+      48.03
+    ],
+    "parts": [
+      {
+        "name": "Frame, 8.8 mm motor holders",
+        "role": "structure",
+        "center": [
+          0,
+          -6,
+          0
+        ],
+        "size": [
+          96.05,
+          18,
+          96.05
+        ]
+      }
+    ]
+  },
+  "flix-fit-test": {
+    "src": "/models/flix-fit-test.glb",
+    "bytes": 50592,
+    "triangles": 15738,
+    "min": [
+      -12,
+      -15,
+      -65.7
+    ],
+    "max": [
+      5.7,
+      3,
+      5.55
+    ],
+    "parts": [
+      {
+        "name": "Holder fit test, 8.7 to 9.0 mm",
+        "role": "mechanism",
+        "center": [
+          -3.15,
+          -6,
+          -30.07
+        ],
+        "size": [
+          17.7,
+          18,
+          71.25
+        ]
+      }
+    ]
+  },
+  "safewalk-cuff": {
+    "src": "/models/safewalk-cuff.glb",
+    "bytes": 853208,
+    "triangles": 54830,
+    "min": [
+      -16,
+      -1.55,
+      -10
+    ],
+    "max": [
+      16,
+      2.41,
+      10
+    ],
+    "raw": true,
+    "unitScale": 1,
+    "parts": [
+      {
+        "name": "Cuff PCB v0.2",
+        "role": "structure",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "safewalk-tag": {
+    "src": "/models/safewalk-tag.glb",
+    "bytes": 753472,
+    "triangles": 34126,
+    "min": [
+      -9,
+      -6.6,
+      -9
+    ],
+    "max": [
+      9,
+      2.41,
+      9
+    ],
+    "raw": true,
+    "unitScale": 1,
+    "parts": [
+      {
+        "name": "Tag PCB v0.1",
+        "role": "structure",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+}

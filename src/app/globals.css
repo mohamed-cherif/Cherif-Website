@@ -4,151 +4,222 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Colors */
-  --color-primary: #2563EB;
-  --color-primary-light: #3B82F6;
-  --color-primary-dark: #1D4ED8;
-  --color-accent: #F97316;
-  --color-accent-light: #FB923C;
-  --color-secondary: #10B981;
-  --color-secondary-light: #34D399;
+  /* One signal colour. --color-primary is kept as an alias so older
+     components keep working. */
+  --color-accent: #ff5a1f;
+  --color-accent-light: #ff7a45;
+  --color-primary: #ff5a1f;
+  --color-primary-light: #ff7a45;
+  --color-primary-dark: #d9480f;
+  --color-secondary: #8b9199;
+  --color-secondary-light: #a5abb3;
 
-  /* Fonts */
-  --font-display: var(--font-space-grotesk), sans-serif;
-  --font-body: var(--font-inter), sans-serif;
-  --font-mono: var(--font-jetbrains-mono), monospace;
+  --font-display: var(--font-plex-sans), system-ui, sans-serif;
+  --font-body: var(--font-plex-sans), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
+/* Drawing paper */
 :root {
-  --color-bg: #F8FAFC;
-  --color-surface: #FFFFFF;
-  --color-text: #0A0F1E;
-  --color-muted: #475569;
-  --color-border: #E2E8F0;
+  --color-bg: #f2f1ed;
+  --color-surface: #faf9f6;
+  --color-raised: #ffffff;
+  --color-text: #101214;
+  --color-muted: #5b6068;
+  --color-border: #d6d4cd;
+  --color-line: #a8a69f;
+  --color-accent: #d9480f;
+  --color-primary: #d9480f;
+  --grid-line: rgba(16, 18, 20, 0.055);
+
+  /* CAD part colours, read by the 3D viewer */
+  --part-structure: #c4c7cc;
+  --part-detail: #8d939b;
+  --part-actuator: #4b5159;
+  --part-mechanism: #e8500f;
+  --part-reference: #7c8691;
+  --part-edge: #14171a;
 }
 
+/* Graphite */
 .dark {
-  --color-bg: #07090F;
-  --color-surface: #0F1526;
-  --color-text: #F1F5F9;
-  --color-muted: #94A3B8;
-  --color-border: #1E293B;
+  --color-bg: #0a0b0d;
+  --color-surface: #101214;
+  --color-raised: #15181b;
+  --color-text: #e9ebee;
+  --color-muted: #8b9199;
+  --color-border: #22262b;
+  --color-line: #3a4047;
+  --color-accent: #ff5a1f;
+  --color-primary: #ff5a1f;
+  --grid-line: rgba(233, 235, 238, 0.045);
+
+  --part-structure: #d3d6da;
+  --part-detail: #8f959d;
+  --part-actuator: #4d535b;
+  --part-mechanism: #ff5a1f;
+  --part-reference: #5d6670;
+  --part-edge: #050607;
+}
+
+/* Sharp everywhere: no rounded corners anywhere on the site. */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
-/* Blueprint dot grid */
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #0a0b0d;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+}
+
+:focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Drafting grid: fine squares with a heavier line every fifth */
 .blueprint-grid {
-  background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
 }
 
-/* Glow utilities */
-.glow-blue {
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.35), 0 0 36px rgba(37, 99, 235, 0.12);
-}
-.dark .glow-blue {
-  box-shadow: 0 0 14px rgba(59, 130, 246, 0.45), 0 0 44px rgba(59, 130, 246, 0.18);
-}
-
-/* Notched corner cards */
-.card-notch {
-  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
-}
-
-/* Circuit paths */
-.circuit-path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: dash 2.4s ease-in-out forwards;
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #2563EB, #F97316);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.dark .gradient-text {
-  background: linear-gradient(135deg, #3B82F6, #FB923C);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb { background: #2563EB; border-radius: 3px; }
-
-::selection { background: #F97316; color: white; }
-
-/* Keyframes */
-@keyframes dash {
-  from { stroke-dashoffset: 1000; }
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 0.9; }
-}
-
-@keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Tech / skill chips (layered so utilities like text-[10px] still override) */
 @layer components {
+  /* Small uppercase mono label, the site's main typographic motif */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1.3;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
   .tech-chip {
     display: inline-flex;
     align-items: center;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     line-height: 1.4;
-    padding: 0.2rem 0.55rem;
-    border-radius: 0.375rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.45rem;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-muted);
+  }
+
+  /* Hairline panel */
+  .panel {
     border: 1px solid var(--color-border);
     background: var(--color-surface);
-    color: var(--color-muted);
+  }
+
+  /* Registration ticks on the four corners of a frame */
+  .ticks {
+    position: relative;
+  }
+  .ticks::before,
+  .ticks::after {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .ticks::before {
+    top: -1px;
+    left: -1px;
+    border-top: 1px solid var(--color-accent);
+    border-left: 1px solid var(--color-accent);
+  }
+  .ticks::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 1px solid var(--color-accent);
+    border-right: 1px solid var(--color-accent);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid var(--color-line);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+  }
+  .btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .btn-solid {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #0a0b0d;
+  }
+  .btn-solid:hover {
+    background: transparent;
+    color: var(--color-accent);
   }
 }
 
-/* Hide cursor follower on touch */
-@media (pointer: coarse) {
-  .cursor-dot { display: none !important; }
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
